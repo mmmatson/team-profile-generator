@@ -10,6 +10,11 @@ describe('Manager', () => {
     });
 });
 
+test('getOffice', () => {
+    const manager = new Manager('name', 1, 'email', "office number");
+    expect(typeof manager.office).toBe('string');
+});
+
 //Test - gets role - overrides to return manager - expect to be manager
 test('getRole', () => {
     const manager = new Manager('name', 1, 'email', "office number");
