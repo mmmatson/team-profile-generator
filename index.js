@@ -1,9 +1,11 @@
 //Packages needed for this application
 const inquirer = require("inquirer");
+const fs = require('fs');
+const generateHTML = require("./src/generateHTML");
 
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern'); 
+const Intern = require('./lib/Intern');
 
 let team = [];
 
@@ -32,11 +34,10 @@ const managerQuestions = () => {
         }
     ])
         .then(managerAnswers => {
-            const manager = new Manager (managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.office);
+            const manager = new Manager(managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.office);
             team = team.concat(manager);
-            teamQuestions();
-        })
-}
+        });
+};
 
 const teamQuestions = () => {
     return inquirer.prompt([
@@ -84,29 +85,38 @@ const teamQuestions = () => {
         }
     ])
         .then((teamAnswers) => {
-            if (teamAnswers.role === "Engineer")
-            {
-                const engineer = new Engineer (teamAnswers.name, teamAnswers.id, teamAnswers.email, teamAnswers.github);
+            if (teamAnswers.role === "Engineer") {
+                const engineer = new Engineer(teamAnswers.name, teamAnswers.id, teamAnswers.email, teamAnswers.github);
                 team = team.concat(engineer);
             }
-            if (teamAnswers.role === "Intern")
-            {
-                const intern = new Intern (teamAnswers.name, teamAnswers.id, teamAnswers.email, teamAnswers.school);
+            if (teamAnswers.role === "Intern") {
+                const intern = new Intern(teamAnswers.name, teamAnswers.id, teamAnswers.email, teamAnswers.school);
                 team = team.concat(intern);
             }
             if (teamAnswers.add === true) {
                 teamQuestions();
             }
             if (teamAnswers.add === false) {
-                console.log(team);
+                console.log(team)
+                return team;
             }
         });
 };
 
+//Define function to write file
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) =>
+        err ? console.error(err) : console.log('Team HTML file successfully generated!')
+    );
+}
+
 //Define function to initialize app
 function init() {
-    managerQuestions();
-}
+    managerQuestions()
+    .then(teamQuestions)
+    .then((team) => {return writeToFile('./dist/team.html', generateHTML(team))})
+    .catch((err) => console.error(err));
+    }
 
 // Call function to initialize app
 init();
