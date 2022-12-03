@@ -1,6 +1,12 @@
 //Packages needed for this application
 const inquirer = require("inquirer");
 
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern'); 
+
+let team = [];
+
 //Questions to prompt user for input
 const managerQuestions = () => {
     return inquirer.prompt([
@@ -26,7 +32,8 @@ const managerQuestions = () => {
         }
     ])
         .then(managerAnswers => {
-            console.log(managerAnswers);
+            const manager = new Manager (managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.office);
+            team = team.concat(manager);
             teamQuestions();
         })
 }
@@ -77,13 +84,24 @@ const teamQuestions = () => {
         }
     ])
         .then((teamAnswers) => {
-            console.log(teamAnswers);
+            if (teamAnswers.role === "Engineer")
+            {
+                const engineer = new Engineer (teamAnswers.name, teamAnswers.id, teamAnswers.email, teamAnswers.github);
+                team = team.concat(engineer);
+            }
+            if (teamAnswers.role === "Intern")
+            {
+                const intern = new Intern (teamAnswers.name, teamAnswers.id, teamAnswers.email, teamAnswers.school);
+                team = team.concat(intern);
+            }
             if (teamAnswers.add === true) {
                 teamQuestions();
             }
+            if (teamAnswers.add === false) {
+                console.log(team);
+            }
         });
 };
-
 
 //Define function to initialize app
 function init() {
