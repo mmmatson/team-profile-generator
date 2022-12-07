@@ -8,7 +8,7 @@ In this repository I created a command-line application that dynamically generat
 
   1. Fork the repository so that you have a local copy saved on your computer.
   2. Navigate to the forked repository on your computer using your command line application.
-  3. Enter 'node index.js' in the command line application to start the README generator.
+  3. Enter 'node index.js' in the command line application to start the Team Profile Generator.
 
 ## Usage
 
