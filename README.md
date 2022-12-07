@@ -16,7 +16,7 @@ In this repository I created a command-line application that dynamically generat
 
 ![Team Profile Generator Video Demo](assets/videos/demo-team-profile-generator.webm)
 
-Follow the instructions for installation to start the team profile generator. Answer the question in your command line application to populate the team profile HTML file. Once you have answered all questions, a "team.html" file will be generated in the "src" folder of your forked repository.
+Follow the instructions for installation to start the team profile generator. Answer the questions in your command line application to populate the team profile HTML file. Once you have answered all questions, a "team.html" file will be generated in the "dist" folder of your forked repository.
 
 ## Credits
 
