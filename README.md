@@ -12,7 +12,7 @@ In this repository I created a command-line application that dynamically generat
 
 ## Usage
 
-[Team Profile Generator Video Demo](TBA)
+[Team Profile Generator Video Demo](https://drive.google.com/file/d/1IbdkhA4Uu6qy86C44RujtrovDxtoQSjv/view)
 
 ![Team Profile Generator Video Demo](assets/videos/demo-team-profile-generator.webm)
 
