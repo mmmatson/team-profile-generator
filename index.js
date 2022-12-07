@@ -35,6 +35,7 @@ const managerQuestions = () => {
     ])
         .then(managerAnswers => {
             const manager = new Manager(managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.office);
+            manager.role="Manager";
             team = team.concat(manager);
         });
 };
@@ -87,17 +88,19 @@ const teamQuestions = () => {
         .then((teamAnswers) => {
             if (teamAnswers.role === "Engineer") {
                 const engineer = new Engineer(teamAnswers.name, teamAnswers.id, teamAnswers.email, teamAnswers.github);
+                engineer.role="Engineer";
                 team = team.concat(engineer);
             }
             if (teamAnswers.role === "Intern") {
                 const intern = new Intern(teamAnswers.name, teamAnswers.id, teamAnswers.email, teamAnswers.school);
+                intern.role="Intern";
                 team = team.concat(intern);
             }
             if (teamAnswers.add === true) {
                 teamQuestions();
             }
             if (teamAnswers.add === false) {
-                console.log(team)
+                console.log(team);
                 return team;
             }
         });
@@ -113,10 +116,10 @@ function writeToFile(fileName, data) {
 //Define function to initialize app
 function init() {
     managerQuestions()
-    .then(teamQuestions)
-    .then((team) => {return writeToFile('./dist/team.html', generateHTML(team))})
-    .catch((err) => console.error(err));
-    }
+        .then(teamQuestions)
+        .then((team) => {return writeToFile('./dist/team.html', generateHTML(team))})
+        .catch((err) => console.error(err));
+}
 
 // Call function to initialize app
 init();
